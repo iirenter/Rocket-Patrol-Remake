@@ -87,12 +87,15 @@ class Play extends Phaser.Scene {
         fixedWidth: 100
     }
     this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
+    this.timerRight=  this.add.text(borderUISize + borderPadding + 300, borderUISize + borderPadding*2, timer, scoreConfig);
 
     this.gameOver = false;
     scoreConfig.fixedWidth = 0;
     this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
         this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or <- to menu', scoreConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding +60, 'High Score:', scoreConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2 +120, game.config.height/2 + borderUISize + borderPadding +60, highScore, scoreConfig).setOrigin(0.5);
         this.gameOver = true;
     }, null, this);
 
@@ -125,6 +128,16 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset();
             this.shipExplode(this.ship3);
         }
+
+        if(Play.clock <= 30000) {// Add a speed change when time reaches 30 seconds.
+            ship.moveSpeed = ship.moveSpeed * 2;
+        }
+
+        if(this.p1Score > highScore) {
+            highScore = this.p1Score;
+        }
+
+        timer = timer- 1;
 
 
     }

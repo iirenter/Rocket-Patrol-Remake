@@ -10,6 +10,12 @@ class Rocket extends Phaser.GameObjects.Sprite {
     update() {
         if(this.isFiring) {
             this.y -= this.moveSpeed;
+            if(keyLEFT.isDown) {
+                this.x -= this.moveSpeed;// Added ability to control Rocket after firing
+               }
+               if(keyRIGHT.isDown) {
+                this.x +=this.moveSpeed;
+               }
             if(this.y < borderUISize* 3) {
                 this.reset();
             }

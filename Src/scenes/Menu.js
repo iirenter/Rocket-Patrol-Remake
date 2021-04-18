@@ -24,11 +24,14 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
 
+
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize -borderPadding, 'ROCKET PATROl', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2, 'Use <--> arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#00FF00';
         menuConfig.color = '#000';
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press <- for Novice or -> for Expert', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding +30, 'High Score:', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2 +120, game.config.height/2 + borderUISize + borderPadding +30, highScore, menuConfig).setOrigin(0.5);// Added a Highscore to start screen that persists as long as game is running
 
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
@@ -43,6 +46,7 @@ class Menu extends Phaser.Scene {
             }
             this.sound.play('sfx_select');
             this.scene.start('PlayScene');
+            timer = 60;
         }
 
         if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
@@ -52,6 +56,7 @@ class Menu extends Phaser.Scene {
             }
             this.sound.play('sfx_select');
             this.scene.start('PlayScene');
+            timer = 45;
         }
     }
 }
