@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
     }
     preload() {
         this.load.image('starfield', 'assets/Neo starfield.png');// Replaced starfield background with a different background
+        this.load.image('planets', 'assets/planets.png');
         this.load.image('rocket', 'assets/rocket.png');
         this.load.image('ship', 'assets/spaceship.png');
         this.load.image('newship', 'assets/Fast Ship.png');
@@ -15,6 +16,10 @@ class Play extends Phaser.Scene {
         this.starfield = this.add.tileSprite(
         0,0,640,480, 'starfield'
          ).setOrigin(0,0);
+
+         this.planets = this.add.tileSprite(
+            0,0,640,480, 'planets'
+             ).setOrigin(0,0);
 
          this.p1Rocket = new Rocket(
              this,
@@ -82,6 +87,7 @@ class Play extends Phaser.Scene {
     });
 
     this.p1Score = 0;
+    this.currentTime= timer;
 
     let scoreConfig = {
         fontFamily: 'Courier',
@@ -96,9 +102,10 @@ class Play extends Phaser.Scene {
         fixedWidth: 100
     }
     this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
-    this.timerRight=  this.add.text(borderUISize + borderPadding + 300, borderUISize + borderPadding*2, timer, scoreConfig);
+    this.timerRight=  this.add.text(borderUISize + borderPadding + 300, borderUISize + borderPadding*2, this.currentTime, scoreConfig);
 
     this.gameOver = false;
+    
     scoreConfig.fixedWidth = 0;
     this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
         this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
@@ -106,6 +113,12 @@ class Play extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding +60, 'High Score:', scoreConfig).setOrigin(0.5);
         this.add.text(game.config.width/2 +120, game.config.height/2 + borderUISize + borderPadding +60, highScore, scoreConfig).setOrigin(0.5);
         this.gameOver = true;
+    }, null, this);
+
+    this.clock = this.time.delayedCall(game.settings.gameTimer- 30000, () => {// Added a speed increase to ships after 30 secs
+        this.ship1.moveSpeed = this.ship1.moveSpeed*2;
+        this.ship2.moveSpeed = this.ship2.moveSpeed*2;
+        this.ship3.moveSpeed = this.ship3.moveSpeed*2;
     }, null, this);
 
     }
@@ -118,6 +131,8 @@ class Play extends Phaser.Scene {
             this.scene.start("MenuScene");
         }
         this.starfield.tilePositionX -=4;
+
+        this.planets.tilePositionX -=1;// addes a parallax scrolling background
         if(!this.gameOver){
         this.p1Rocket.update();
         this.ship1.update();
@@ -144,18 +159,12 @@ class Play extends Phaser.Scene {
             this.shipExplode(this.ship4);
         }
 
-
-        if(Play.clock <= 30000) {// Add a speed change when time reaches 30 seconds.
-            ship.moveSpeed = ship.moveSpeed * 2;
-        }
-
         if(this.p1Score > highScore) {
             highScore = this.p1Score;
         }
 
-        timer = timer- 1;
-
-
+        this.currentTime -=1;
+        this.timerRight.text = this.currentTime;
     }
     
     checkCollision(rocket, ship){
