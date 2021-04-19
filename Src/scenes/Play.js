@@ -5,9 +5,10 @@ class Play extends Phaser.Scene {
         super("PlayScene");
     }
     preload() {
-        this.load.image('starfield', 'assets/starfield.png');
+        this.load.image('starfield', 'assets/Neo starfield.png');// Replaced starfield background with a different background
         this.load.image('rocket', 'assets/rocket.png');
         this.load.image('ship', 'assets/spaceship.png');
+        this.load.image('newship', 'assets/Fast Ship.png');
         this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
     create() { 
@@ -44,6 +45,14 @@ class Play extends Phaser.Scene {
             300,
             'ship',
             0, 10
+        );
+
+        this.ship4= new newShip(
+            this,
+            50,
+            150,
+            'newship',
+            0, 100
         );
 
         // green UI Background
@@ -114,6 +123,7 @@ class Play extends Phaser.Scene {
         this.ship1.update();
         this.ship2.update();
         this.ship3.update();
+        this.ship4.update();
         }
 
         if(this.checkCollision(this.p1Rocket, this.ship1)){
@@ -128,6 +138,12 @@ class Play extends Phaser.Scene {
             this.p1Rocket.reset();
             this.shipExplode(this.ship3);
         }
+
+        if(this.checkCollision(this.p1Rocket, this.ship4)) {
+            this.p1Rocket.reset();
+            this.shipExplode(this.ship4);
+        }
+
 
         if(Play.clock <= 30000) {// Add a speed change when time reaches 30 seconds.
             ship.moveSpeed = ship.moveSpeed * 2;
