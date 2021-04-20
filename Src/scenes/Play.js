@@ -7,10 +7,11 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('starfield', 'assets/Neo starfield.png');// Replaced starfield background with a different background
         this.load.image('planets', 'assets/planets.png');
-        this.load.image('rocket', 'assets/rocket.png');
-        this.load.image('ship', 'assets/spaceship.png');
+        this.load.image('rocket', 'assets/new rocket.png');// Added new assets for rocket, ships , and explosion.
+        this.load.image('ship', 'assets/new Ship.png');
         this.load.image('newship', 'assets/Fast Ship.png');
-        this.load.spritesheet('explosion', 'assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.image('newship', 'assets/Fast Ship.png');
+        this.load.spritesheet('explosion', 'assets/new Explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
     create() { 
         this.starfield = this.add.tileSprite(
@@ -90,7 +91,7 @@ class Play extends Phaser.Scene {
     this.currentTime= timer;
 
     let scoreConfig = {
-        fontFamily: 'Courier',
+        fontFamily: 'Special Elite',
         fontSize: '28px',
         backgroundColor: '#F3B141',
         color: '#843605',
@@ -163,6 +164,11 @@ class Play extends Phaser.Scene {
             highScore = this.p1Score;
         }
 
+        this.updateTime();
+        
+    }
+
+    updateTime(){
         this.currentTime -=1;
         this.timerRight.text = this.currentTime;
     }

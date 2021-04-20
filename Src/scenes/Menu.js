@@ -12,7 +12,7 @@ class Menu extends Phaser.Scene {
     }
     create() {
         let menuConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'Special Elite',
             fontSize: '28px',
             backgroundColor: '#F3B141',
             color: '#843605',
@@ -46,7 +46,7 @@ class Menu extends Phaser.Scene {
             }
             this.sound.play('sfx_select');
             this.scene.start('PlayScene');
-            timer = 60;
+            timer = 6000;
         }
 
         if(Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
@@ -56,7 +56,7 @@ class Menu extends Phaser.Scene {
             }
             this.sound.play('sfx_select');
             this.scene.start('PlayScene');
-            timer = 45;
+            timer = 4500;
         }
     }
 }
