@@ -6,11 +6,17 @@ class Menu extends Phaser.Scene {
     }
 
     preload(){
+        this.load.image('Title', 'assets/Title Screen Rocket Patrol.png');
         this.load.audio('sfx_select', 'assets/blip_select12.wav');
         this.load.audio('sfx_explosion', 'assets/explosion38.wav');
         this.load.audio('sfx_rocket', 'assets/rocket_shot.wav');
     }
     create() {
+
+        this.title = this.add.tileSprite(// Added new image, typograhy, and layout to start menu
+            0,0,640,480, 'Title'
+             ).setOrigin(0,0);
+
         let menuConfig = {
             fontFamily: 'Special Elite',
             fontSize: '28px',
