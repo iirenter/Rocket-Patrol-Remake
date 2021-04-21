@@ -11,4 +11,4 @@ let borderPadding = borderUISize / 3;
 let highScore= 0;
 let timer= 0;
 
-let keyLEFT, keyRIGHT, keyF, keyR;
+let keyLEFT, keyRIGHT, keyF, keyR, keyS;

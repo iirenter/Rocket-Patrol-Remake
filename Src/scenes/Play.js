@@ -10,7 +10,7 @@ class Play extends Phaser.Scene {
         this.load.image('rocket', 'assets/new rocket.png');// Added new assets for rocket, ships , and explosion.
         this.load.image('ship', 'assets/new Ship.png');
         this.load.image('newship', 'assets/Fast Ship.png');
-        this.load.image('newship', 'assets/Fast Ship.png');
+        this.load.image('screenClear', 'assets/screen clear.png');
         this.load.spritesheet('explosion', 'assets/new Explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
     create() { 
@@ -28,6 +28,13 @@ class Play extends Phaser.Scene {
              game.config.height -borderUISize - borderPadding,
              'rocket'
          ).setOrigin(0.5,0);
+
+            this.screenClear = new screenClear(
+                this,
+                game.config.width/2,
+                game.config.height -borderUISize - borderPadding + 15,
+                'screenClear'
+            ).setOrigin(0.5,0);
 
          this.ship1= new Ship(
              this,
@@ -78,6 +85,7 @@ class Play extends Phaser.Scene {
 
     keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
     keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+    keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
     keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
     keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
@@ -136,10 +144,25 @@ class Play extends Phaser.Scene {
         this.planets.tilePositionX -=1;// addes a parallax scrolling background
         if(!this.gameOver){
         this.p1Rocket.update();
+        this.screenClear.update();
         this.ship1.update();
         this.ship2.update();
         this.ship3.update();
         this.ship4.update();
+        }
+
+        if(this.checkCollision(this.screenClear, this.ship1)){
+            this.shipExplode(this.ship1);
+        }
+        if(this.checkCollision(this.screenClear, this.ship2)) {
+            this.shipExplode(this.ship2);
+        }
+        if(this.checkCollision(this.screenClear, this.ship3)) {
+            this.shipExplode(this.ship3);
+        }
+
+        if(this.checkCollision(this.screenClear, this.ship4)) {
+            this.shipExplode(this.ship4);
         }
 
         if(this.checkCollision(this.p1Rocket, this.ship1)){
@@ -180,6 +203,7 @@ class Play extends Phaser.Scene {
             return false;
         }
     }
+
 
     shipExplode(ship) {
         ship.alpha= 0;
