@@ -7,7 +7,7 @@ class Play extends Phaser.Scene {
     preload() {
         this.load.image('starfield', 'Assets/Neo starfield.png');// Replaced starfield background with a different background
         this.load.image('planets', 'Assets/planets.png');
-        this.load.image('rocket', 'Assets/new rocket.png');// Added new assets for rocket, ships , and explosion.
+        this.load.image('rocket', 'Assets/new Rocket.png');// Added new assets for rocket, ships , and explosion.
         this.load.image('ship', 'Assets/new Ship.png');
         this.load.image('newship', 'Assets/Fast Ship.png');
         this.load.image('screenClear', 'Assets/screen clear.png');
