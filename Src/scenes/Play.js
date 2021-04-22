@@ -5,13 +5,13 @@ class Play extends Phaser.Scene {
         super("PlayScene");
     }
     preload() {
-        this.load.image('starfield', 'assets/Neo starfield.png');// Replaced starfield background with a different background
-        this.load.image('planets', 'assets/planets.png');
-        this.load.image('rocket', 'assets/new rocket.png');// Added new assets for rocket, ships , and explosion.
-        this.load.image('ship', 'assets/new Ship.png');
-        this.load.image('newship', 'assets/Fast Ship.png');
-        this.load.image('screenClear', 'assets/screen clear.png');
-        this.load.spritesheet('explosion', 'assets/new Explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
+        this.load.image('starfield', 'Assets/Neo starfield.png');// Replaced starfield background with a different background
+        this.load.image('planets', 'Assets/planets.png');
+        this.load.image('rocket', 'Assets/new rocket.png');// Added new assets for rocket, ships , and explosion.
+        this.load.image('ship', 'Assets/new Ship.png');
+        this.load.image('newship', 'Assets/Fast Ship.png');
+        this.load.image('screenClear', 'Assets/screen clear.png');
+        this.load.spritesheet('explosion', 'Assets/new Explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
     }
     create() { 
         this.starfield = this.add.tileSprite(
